@@ -1,0 +1,2211 @@
+<!doctype html>
+<html lang="de">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tyson Tuner GMBH & Co KG - GTA RP</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            border-bottom: 3px solid #e74c3c;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .logo-text h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .logo-text p {
+            margin: 0;
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            background: rgba(231, 76, 60, 0.1);
+            border: 2px solid #e74c3c;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-tab:hover {
+            background: #e74c3c;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .nav-tab.active {
+            background: #e74c3c;
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.6);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 40px 0;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.2);
+            border-color: #e74c3c;
+        }
+
+        /* Hierarchie-spezifische Layouts */
+        .boss-section {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .vice-boss-section {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .team-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 20px 0;
+        }
+
+        /* Rang-Badges */
+        .rank-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+            z-index: 10;
+        }
+
+        .boss-badge {
+            background: linear-gradient(45deg, #f1c40f, #f39c12);
+            box-shadow: 0 4px 15px rgba(241, 196, 15, 0.4);
+        }
+
+        .vice-boss-badge {
+            background: linear-gradient(45deg, #e67e22, #d35400);
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.4);
+        }
+
+        .salesman-badge {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .mechanic-badge {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .employee-badge {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            box-shadow: 0 4px 15px rgba(155, 89, 182, 0.4);
+        }
+
+        .apprentice-badge {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+        }
+
+        /* Karten-spezifische Styles */
+        .boss-card {
+            border: 2px solid #f1c40f;
+            background: rgba(241, 196, 15, 0.1);
+            max-width: 400px;
+        }
+
+        .vice-boss-card {
+            border: 2px solid #e67e22;
+            background: rgba(230, 126, 34, 0.1);
+            max-width: 380px;
+        }
+
+        .salesman-card {
+            border: 1px solid rgba(52, 152, 219, 0.4);
+            background: rgba(52, 152, 219, 0.05);
+        }
+
+        .mechanic-card {
+            border: 1px solid rgba(231, 76, 60, 0.4);
+            background: rgba(231, 76, 60, 0.05);
+        }
+
+        .employee-card {
+            border: 1px solid rgba(155, 89, 182, 0.4);
+            background: rgba(155, 89, 182, 0.05);
+        }
+
+        .apprentice-card {
+            border: 1px solid rgba(46, 204, 113, 0.4);
+            background: rgba(46, 204, 113, 0.05);
+        }
+
+        /* Sektion-Titel */
+        .section-title {
+            text-align: center;
+            margin: 50px 0 30px 0;
+        }
+
+        .section-title h3 {
+            font-size: 28px;
+            color: #ecf0f1;
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            padding: 15px;
+            border-bottom: 2px solid rgba(231, 76, 60, 0.3);
+            display: inline-block;
+        }
+
+        .car-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .car-svg {
+            width: 120px;
+            height: 80px;
+            opacity: 0.8;
+        }
+
+        /* Autohaus Section */
+        .car-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .car-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(243, 156, 18, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .car-item:hover {
+            border-color: #f39c12;
+            box-shadow: 0 8px 25px rgba(243, 156, 18, 0.2);
+        }
+
+        /* Events Section */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .event-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.2);
+            border-color: #3498db;
+        }
+
+        .event-date {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .event-status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .status-upcoming {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            color: white;
+        }
+
+        .status-ongoing {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        .status-finished {
+            background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+            color: white;
+        }
+
+        /* Preise Section */
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .price-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .price-card:hover {
+            border-color: #2ecc71;
+            transform: translateY(-3px);
+        }
+
+        .price {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2ecc71;
+            margin: 15px 0;
+        }
+
+        /* Bewerbung Section */
+        .application-form {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(155, 89, 182, 0.3);
+            max-width: 600px;
+            margin: 30px auto 0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ecf0f1;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(155, 89, 182, 0.3);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #9b59b6;
+            box-shadow: 0 0 10px rgba(155, 89, 182, 0.3);
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.4);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #e74c3c, #f39c12);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: #bdc3c7;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Category Navigation */
+        .category-nav {
+            display: flex;
+            gap: 10px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .category-btn {
+            background: rgba(231, 76, 60, 0.1);
+            border: 2px solid #e74c3c;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .category-btn:hover {
+            background: rgba(231, 76, 60, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.2);
+        }
+
+        .category-btn.active {
+            background: #e74c3c;
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.4);
+        }
+
+        /* Subcategory Navigation */
+        .subcategory-nav {
+            display: flex;
+            gap: 8px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            border: 1px solid rgba(231, 76, 60, 0.2);
+        }
+
+        .subcategory-btn {
+            background: rgba(243, 156, 18, 0.1);
+            border: 1px solid #f39c12;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 400;
+            font-size: 12px;
+        }
+
+        .subcategory-btn:hover {
+            background: rgba(243, 156, 18, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(243, 156, 18, 0.2);
+        }
+
+        .subcategory-btn.active {
+            background: #f39c12;
+            box-shadow: 0 0 15px rgba(243, 156, 18, 0.4);
+        }
+
+        /* Subcategory Content */
+        .subcategory-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .subcategory-content.active {
+            display: block;
+        }
+
+        /* Category Content */
+        .category-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .category-content.active {
+            display: block;
+        }
+
+        /* Calculator Styles */
+        .calculator-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(243, 156, 18, 0.2);
+        }
+
+        .calculator-section:last-child {
+            border-bottom: none;
+        }
+
+        .calculator-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+        }
+
+        .calculator-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .calculator-option:hover {
+            background: rgba(243, 156, 18, 0.1);
+            border-color: rgba(243, 156, 18, 0.3);
+        }
+
+        .calculator-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #f39c12;
+            cursor: pointer;
+        }
+
+        .calculator-option span {
+            color: #ecf0f1;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .calculator-option input[type="checkbox"]:checked + span {
+            color: #f39c12;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-tabs {
+                justify-content: center;
+            }
+
+            .logo-text h1 {
+                font-size: 24px;
+            }
+
+            .section-header h2 {
+                font-size: 28px;
+            }
+
+            .category-nav {
+                gap: 8px;
+            }
+
+            .category-btn {
+                padding: 10px 16px;
+                font-size: 12px;
+            }
+
+            /* Calculator responsive */
+            #rechner > div:first-child {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+
+            .calculator-options {
+                grid-template-columns: 1fr !important;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <header class="header">
+   <div class="container">
+    <div class="header-content">
+     <div class="logo">
+      <div class="logo-icon">
+       🏎️
+      </div>
+      <div class="logo-text">
+       <h1 id="crew-name">Tyson Tuner GMBH & Co KG</h1>
+       <p id="crew-slogan">Speed. Style. Perfection.</p>
+      </div>
+     </div>
+    </div>
+    <nav class="nav-tabs"><button class="nav-tab active" onclick="showTab('team')">Team</button> <button class="nav-tab" onclick="showTab('autohaus')">Autohaus</button> <button class="nav-tab" onclick="showTab('preise')">Preise</button> <button class="nav-tab" onclick="showTab('events')">Events</button> 
+    </nav>
+   </div>
+  </header>
+  <main class="main-content">
+   <div class="container"><!-- Team Tab -->
+    <div id="team" class="tab-content active">
+     <div class="section-header">
+      <h2 id="about-title">Unser Team</h2>
+      <p id="about-text">Die besten Tuner der Stadt - Leidenschaft trifft auf Perfektion</p>
+     </div><!-- Chef - Zentral positioniert -->
+     <div class="boss-section">
+      <div class="team-card boss-card">
+       <div class="rank-badge boss-badge">
+        👑 CHEF
+       </div>
+       <div class="car-image"><img src="TBBild1.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild1
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Besitzer:</strong> Tyson Eweka</p>
+       <p><strong>Position:</strong> Crew-Chef &amp; Gründer</p>
+       <p><strong>Rolle:</strong> Leitung, Organisation & Strategie</p>
+       <p>Gründer und leitende Kraft hinter unserer Crew.</p>
+      </div>
+     </div><!-- Vize-Chef - Zentral unter dem Chef -->
+     <div class="vice-boss-section">
+      <div class="team-card vice-boss-card">
+       <div class="rank-badge vice-boss-badge">
+        ⭐ VIZE-CHEF
+       </div>
+       <div class="car-image"><img src="TBBild2.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild2
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Name:</strong> Jesús Martínez</p>
+       <p><strong>Position:</strong> Stellvertretender Chef</p>
+       <p><strong>Rolle:</strong> Leitung, Organisation & Strategie</p>
+       <p>Die rechte Hand des Chefs - Führung und Innovation vereint.</p>
+      </div>
+     </div><!-- Salesmen - 3 nebeneinander -->
+     <div class="section-title">
+      <h3>🤝 SALESMEN</h3>
+     </div>
+     <div class="team-row">
+      <div class="team-card salesman-card">
+       <div class="rank-badge salesman-badge">
+        💼 SALESMAN
+       </div>
+       <div class="car-image"><img src="TBBild3.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild3
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Name:</strong> Mustafa Börek</p>
+       <p><strong>Position:</strong> Senior Salesman</p>
+       <p><strong>Nummer:</strong> (042) 725-91</p>
+       <p>Verkaufsprofi mit Stil - jeder Deal ein Erfolg.</p>
+      </div>
+      <div class="team-card salesman-card">
+       <div class="rank-badge salesman-badge">
+        💼 SALESMAN
+       </div>
+       <div class="car-image"><img src="TBBild4.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild4
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Besitzer:</strong> Mixo Pourquoi</p>
+       <p><strong>Position:</strong> Salesman</p>
+       <p><strong>Nummer:</strong> (002) 500-10</p>
+       <p>Kundenbetreuung auf höchstem Niveau - Vertrauen ist alles.</p>
+      </div>
+      <div class="team-card salesman-card">
+       <div class="rank-badge salesman-badge">
+        💼 SALESMAN
+       </div>
+       <div class="car-image"><img src="TBBild5.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild5
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Besitzer:</strong> Efe kaan</p>
+       <p><strong>Position:</strong> Salesman</p>
+       <p><strong>Nummer:</strong> (077) 707-62</p>
+       <p>Spezialist für Luxus-Fahrzeuge - Klasse und Performance.</p>
+      </div>
+     </div><!-- Mechaniker - 3 nebeneinander -->
+     <div class="section-title">
+      <h3>🔧 MECHANIKER</h3>
+     </div>
+     <div class="team-row">
+      <div class="team-card mechanic-card">
+       <div class="rank-badge mechanic-badge">
+        🔧 MECHANIKER
+       </div>
+       <div class="car-image"><img src="TBBild6.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild6
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Name:</strong> Marlon King</p>
+       <p><strong>Position:</strong> Chefmechaniker</p>
+       <p><strong>Nummer:</strong> (044) 014-25</p>
+       <p>Der beste Mechaniker der Stadt - Perfektion in jeder Schraube.</p>
+      </div>
+      <div class="team-card mechanic-card">
+       <div class="rank-badge mechanic-badge">
+        🔧 MECHANIKER
+       </div>
+       <div class="car-image"><img src="TBBild7.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild7
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Name:</strong> JDMExpert_GTA</p>
+       <p><strong>Position:</strong> JDM-Spezialist</p>
+       <p><strong>Nummer:</strong> 850 PS, 2JZ Single Turbo, Custom Build</p>
+       <p>JDM-Legende - wenn es um japanische Autos geht, ist er der Beste.</p>
+      </div>
+      <div class="team-card mechanic-card">
+       <div class="rank-badge mechanic-badge">
+        🔧 MECHANIKER
+       </div>
+       <div class="car-image"><img src="TBBild8.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild8
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Besitzer:</strong> Roman Charles</p>
+       <p><strong>Position:</strong> Mechaniker</p>
+       <p><strong>Nummer:</strong> (054) 617-48</p>
+       <p>Präzision ist seine Leidenschaft.</p>
+      </div>
+     </div>
+     <div class="team-row">
+      <div class="team-card mechanic-card">
+       <div class="rank-badge mechanic-badge">
+        🔧 MECHANIKER
+       </div>
+       <div class="car-image"><img src="TBBild9.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild9
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Name:</strong> ----------</p>
+       <p><strong>Position:</strong> Mechaniker</p>
+       <p><strong>Nummer:</strong> ----------</p>
+       <p>----------</p>
+      </div>
+      <div class="team-card mechanic-card">
+       <div class="rank-badge mechanic-badge">
+        🔧 MECHANIKER
+       </div>
+       <div class="car-image"><img src="TBBild10.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild10
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Name:</strong> ----------</p>
+       <p><strong>Position:</strong> Mechaniker</p>
+       <p><strong>Nummer:</strong> ----------</p>
+       <p>----------</p>
+      </div>
+      <div class="team-card mechanic-card">
+       <div class="rank-badge mechanic-badge">
+        🔧 MECHANIKER
+       </div>
+       <div class="car-image"><img src="TBBild11.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild11
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Name:</strong> ----------</p>
+       <p><strong>Position:</strong> Mechaniker</p>
+       <p><strong>Nummer:</strong> ----------</p>
+       <p>----------</p>
+      </div>
+     </div><!-- Azubis - Am Ende -->
+     <div class="section-title">
+      <h3>🎓 AZUBIS</h3>
+     </div>
+     <div class="team-grid">
+      <div class="team-card apprentice-card">
+       <div class="rank-badge apprentice-badge">
+        🎓 AZUBI
+       </div>
+       <div class="car-image"><img src="TBBild12.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild12
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Name:</strong> Basti Berger</p>
+       <p><strong>Position:</strong> Azubi (1. Lehrjahr)</p>
+       <p><strong>Nummer:</strong> (056) 766-06</p>
+       <p>Neues Talent - lernt die Grundlagen des Tunings.</p>
+      </div>
+      <div class="team-card apprentice-card">
+       <div class="rank-badge apprentice-badge">
+        🎓 AZUBI
+       </div>
+       <div class="car-image"><img src="TBBild13.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild13
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Name:</strong> ----------</p>
+       <p><strong>Position:</strong> Azubi</p>
+       <p><strong>Nummer:</strong> ----------</p>
+       <p>----------</p>
+      </div>
+      <div class="team-card apprentice-card">
+       <div class="rank-badge apprentice-badge">
+        🎓 AZUBI
+       </div>
+       <div class="car-image"><img src="TBBild14.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild14
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Name:</strong> ----------</p>
+       <p><strong>Position:</strong> Azubi</p>
+       <p><strong>Nummer:</strong> ----------</p>
+       <p>----------</p>
+      </div>
+      <div class="team-card apprentice-card">
+       <div class="rank-badge apprentice-badge">
+        🎓 AZUBI
+       </div>
+       <div class="car-image"><img src="TBBild15.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild15
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Name:</strong> ----------</p>
+       <p><strong>Position:</strong> Azubi </p>
+       <p><strong>Nummer:</strong> ----------</p>
+       <p>----------</p>
+      </div>
+      <div class="team-card apprentice-card">
+       <div class="rank-badge apprentice-badge">
+        🎓 AZUBI
+       </div>
+       <div class="car-image"><img src="TBBild16.png" alt="Tyson Tuner GMBH & Co KG" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+         TBBild16
+        </div>
+       </div>
+       <h3>Tyson Tuner GMBH & Co KG</h3>
+       <p><strong>Name:</strong> ----------</p>
+       <p><strong>Position:</strong> Azubi </p>
+       <p><strong>Nummer:</strong> ----------</p>
+       <p>----------</p>
+      </div>
+     </div>
+    </div><!-- Autohaus Tab -->
+    <div id="autohaus" class="tab-content">
+     <div class="section-header">
+      <h2>Unser Autohaus</h2>
+      <p>Exklusive Fahrzeuge für anspruchsvolle Kunden</p>
+     </div><!-- Filter Navigation -->
+     <div class="category-nav"><button class="category-btn active" onclick="filterCars('all')">🚗 Alle Fahrzeuge</button> <button class="category-btn" onclick="filterCars('cheapest')">💰 Am günstigsten</button> <button class="category-btn" onclick="filterCars('expensive')">💎 Am teuersten</button> <button class="category-btn" onclick="filterCars('available')">✅ Nur verfügbare</button>
+     </div><!-- Kategorie Filter -->
+     <div class="subcategory-nav" style="display: flex;"><button class="subcategory-btn active" onclick="filterByCategory('all')">🏁 Alle Kategorien</button> <button class="subcategory-btn" onclick="filterByCategory('special')">🌌 Special</button> <button class="subcategory-btn" onclick="filterByCategory('limited')">🏎️Limited</button> <button class="subcategory-btn" onclick="filterByCategory('jdm')">🇯🇵 JDM</button> <button class="subcategory-btn" onclick="filterByCategory('sport')">⚡ Sport</button> <button class="subcategory-btn" onclick="filterByCategory('luxury')">💎 Luxus</button> <button class="subcategory-btn" onclick="filterByCategory('offroad')">🏔️ OFF-Road</button> <button class="subcategory-btn" onclick="filterByCategory('bike')">🏍️ Motorräder</button>
+     </div>
+     <div class="car-showcase" id="car-showcase"><!-- Autos werden dynamisch durch JavaScript geladen -->
+     </div>
+    </div><!-- Preise Tab -->
+    <div id="preise" class="tab-content">
+     <div class="section-header">
+      <h2>Tuning Preise</h2>
+      <p>Professionelle Tuning-Services für jeden Geldbeutel</p>
+     </div><!-- Kategorie Navigation -->
+     <div class="category-nav"><button class="category-btn active" onclick="showCategory('leistung')">⚡ Leistung</button> <button class="category-btn" onclick="showCategory('karosserie')">🚗 Karosserie</button> <button class="category-btn" onclick="showCategory('hupen')">📢 Hupen</button> <button class="category-btn" onclick="showCategory('exterieur')">✨ Exterieur</button> <button class="category-btn" onclick="showCategory('lackierung')">🎨 Lackierung</button> <button class="category-btn" onclick="showCategory('optik')">💎 Optik</button> <button class="category-btn" onclick="showCategory('misc')">🔧 MISC</button> <button class="category-btn" onclick="showCategory('rechner')">🧮 Preisrechner</button>
+     </div><!-- Unterkategorie Navigation (wird dynamisch angezeigt) -->
+     <div class="subcategory-nav" id="subcategory-nav" style="display: none;"><!-- Wird durch JavaScript gefüllt -->
+     </div><!-- Leistung Kategorie -->
+     <div id="leistung" class="category-content active"><!-- Motor Unterkategorie -->
+      <div id="leistung-motor" class="subcategory-content active">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Motor Pro</h3>
+         <div class="price">
+          $10.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Basis Motor Upgrade</li>
+          <li>Leichte Leistungssteigerung</li>
+          <li>Verbesserte Effizienz</li>
+          <li>Einstiegslevel</li>
+         </ul>
+        </div>
+        <div class="price-card">
+         <h3>Motor Super</h3>
+         <div class="price">
+          $40.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Erweiterte Motor Optimierung</li>
+          <li>Deutliche Leistungssteigerung</li>
+          <li>Sport Komponenten</li>
+          <li>Mittleres Level</li>
+         </ul>
+        </div>
+        <div class="price-card">
+         <h3>Motor Elite</h3>
+         <div class="price">
+          $60.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>High-End Motor Tuning</li>
+          <li>Maximale Leistung</li>
+          <li>Racing Komponenten</li>
+          <li>Elite Performance</li>
+         </ul>
+        </div>
+        <div class="price-card">
+         <h3>Motor Ultimate</h3>
+         <div class="price">
+          $70.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Ultimate Motor Setup</li>
+          <li>Absolute Spitzenleistung</li>
+          <li>Custom Racing Parts</li>
+          <li>Maximum Power</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Getriebe Unterkategorie -->
+      <div id="leistung-getriebe" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Getriebe Pro</h3>
+         <div class="price">
+          $10.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Basis Getriebe Upgrade</li>
+          <li>Verbesserte Schaltung</li>
+          <li>Sanftere Gänge</li>
+          <li>Standard Level</li>
+         </ul>
+        </div>
+        <div class="price-card">
+         <h3>Getriebe Super</h3>
+         <div class="price">
+          $40.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Sport Getriebe Setup</li>
+          <li>Schnellere Schaltzeiten</li>
+          <li>Racing Übersetzung</li>
+          <li>Performance Level</li>
+         </ul>
+        </div>
+        <div class="price-card">
+         <h3>Getriebe Elite</h3>
+         <div class="price">
+          $60.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Elite Getriebe System</li>
+          <li>Blitzschnelle Schaltung</li>
+          <li>Custom Übersetzung</li>
+          <li>Maximum Performance</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Federung Unterkategorie -->
+      <div id="leistung-federung" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Federung Standard</h3>
+         <div class="price">
+          $10.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Basis Fahrwerk</li>
+          <li>Verbesserte Straßenlage</li>
+          <li>Komfort optimiert</li>
+          <li>Standard Setup</li>
+         </ul>
+        </div>
+        <div class="price-card">
+         <h3>Federung Super</h3>
+         <div class="price">
+          $40.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Sport Fahrwerk</li>
+          <li>Tieferlegung</li>
+          <li>Bessere Kurvenfahrt</li>
+          <li>Sport Level</li>
+         </ul>
+        </div>
+        <div class="price-card">
+         <h3>Federung Elite</h3>
+         <div class="price">
+          $50.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Racing Fahrwerk</li>
+          <li>Einstellbare Dämpfer</li>
+          <li>Track optimiert</li>
+          <li>Elite Performance</li>
+         </ul>
+        </div>
+        <div class="price-card">
+         <h3>Federung Ultimate</h3>
+         <div class="price">
+          $60.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Ultimate Suspension</li>
+          <li>Volleinstellbar</li>
+          <li>Profi Racing Setup</li>
+          <li>Maximum Control</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Bremsen Unterkategorie -->
+      <div id="leistung-bremsen" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Bremsen Standard</h3>
+         <div class="price">
+          $10.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Verbesserte Bremsanlage</li>
+          <li>Kürzere Bremswege</li>
+          <li>Bessere Bremsleistung</li>
+          <li>Standard Level</li>
+         </ul>
+        </div>
+        <div class="price-card">
+         <h3>Bremsen Super</h3>
+         <div class="price">
+          $40.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Sport Bremsanlage</li>
+          <li>Gelochte Scheiben</li>
+          <li>Racing Bremsbeläge</li>
+          <li>Sport Performance</li>
+         </ul>
+        </div>
+        <div class="price-card">
+         <h3>Bremsen Elite</h3>
+         <div class="price">
+          $60.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Racing Bremsanlage</li>
+          <li>Carbon Ceramic</li>
+          <li>Maximale Bremsleistung</li>
+          <li>Elite Performance</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Turbo Unterkategorie -->
+      <div id="leistung-turbo" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Turbo System</h3>
+         <div class="price">
+          $25.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Turbolader Installation</li>
+          <li>Boost Controller</li>
+          <li>Blow-Off Ventil</li>
+          <li>Turbo Sound</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div><!-- Karosserie Kategorie -->
+     <div id="karosserie" class="category-content"><!-- Body Kit Unterkategorie -->
+      <div id="karosserie-bodykit" class="subcategory-content active">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Body Kit</h3>
+         <div class="price">
+          $25.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Komplettes Karosserie Kit</li>
+          <li>Front- und Heckschürze</li>
+          <li>Seitenschweller</li>
+          <li>Aggressive Optik</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Heckspoiler Unterkategorie -->
+      <div id="karosserie-heckspoiler" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Heckspoiler</h3>
+         <div class="price">
+          $25.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Verschiedene Spoiler Designs</li>
+          <li>Aerodynamik Verbesserung</li>
+          <li>Racing Look</li>
+          <li>Downforce Optimierung</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Dach Unterkategorie -->
+      <div id="karosserie-dach" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Dach Modifikationen</h3>
+         <div class="price">
+          $25.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Dachspoiler</li>
+          <li>Sunroof Optionen</li>
+          <li>Carbon Dach</li>
+          <li>Custom Designs</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Motorraum Unterkategorie -->
+      <div id="karosserie-motorraum" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Motorraum Interieur Mods</h3>
+         <div class="price">
+          $25.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Motorraum Styling</li>
+          <li>Carbon Abdeckungen</li>
+          <li>Custom Luftfilter</li>
+          <li>Show Engine Bay</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div><!-- Hupen Kategorie -->
+     <div id="hupen" class="category-content"><!-- Hupen Unterkategorie -->
+      <div id="hupen-sounds" class="subcategory-content active">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Hupen Upgrade</h3>
+         <div class="price">
+          $15.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Verschiedene Hup-Sounds</li>
+          <li>Air Horn</li>
+          <li>Musical Horn</li>
+          <li>Custom Sounds</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div><!-- Exterieur Kategorie -->
+     <div id="exterieur" class="category-content"><!-- Flügel Unterkategorie -->
+      <div id="exterieur-fluegel" class="subcategory-content active">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Flügel</h3>
+         <div class="price">
+          $25.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Verschiedene Flügel Designs</li>
+          <li>Aerodynamische Verbesserung</li>
+          <li>Racing Look</li>
+          <li>Custom Anpassung</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Überrollbügel Unterkategorie -->
+      <div id="exterieur-ueberrollbuegel" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Überrollbügel</h3>
+         <div class="price">
+          $25.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Sicherheits Überrollbügel</li>
+          <li>Racing Style</li>
+          <li>Verschiedene Designs</li>
+          <li>Schutz und Optik</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div><!-- Lackierung Kategorie -->
+     <div id="lackierung" class="category-content"><!-- Primär Unterkategorie -->
+      <div id="lackierung-primaer" class="subcategory-content active">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Primär Lackierung</h3>
+         <div class="price">
+          $15.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Hauptfarbe des Fahrzeugs</li>
+          <li>Alle Farben verfügbar</li>
+          <li>Metallic &amp; Matte Optionen</li>
+          <li>Premium Qualität</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Sekundär Unterkategorie -->
+      <div id="lackierung-sekundaer" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Sekundär Lackierung</h3>
+         <div class="price">
+          $15.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Zweitfarbe für Akzente</li>
+          <li>Stripes und Details</li>
+          <li>Perfekte Farbkombination</li>
+          <li>Custom Design</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Perleffekt Unterkategorie -->
+      <div id="lackierung-perleffekt" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Perleffekt</h3>
+         <div class="price">
+          $10.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Perlmutt Finish</li>
+          <li>Schimmernde Oberfläche</li>
+          <li>Lichtreflexion</li>
+          <li>Exklusiver Look</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Räder Lackierung Unterkategorie -->
+      <div id="lackierung-raeder" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Räder Lackierung</h3>
+         <div class="price">
+          $5.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Felgen Farbanpassung</li>
+          <li>Verschiedene Farben</li>
+          <li>Matte oder Glänzend</li>
+          <li>Perfekte Abstimmung</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Interieur Lackierung Unterkategorie -->
+      <div id="lackierung-interieur" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Interieur Lackierung</h3>
+         <div class="price">
+          $10.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Innenraum Farbanpassung</li>
+          <li>Armaturenbrett</li>
+          <li>Sitze und Verkleidung</li>
+          <li>Stimmiges Gesamtbild</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Folie Unterkategorie -->
+      <div id="lackierung-folie" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Folie</h3>
+         <div class="price">
+          $10.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Vinyl Wrapping</li>
+          <li>Custom Designs</li>
+          <li>Logos und Grafiken</li>
+          <li>Temporäre Lösung</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div><!-- Optik Kategorie -->
+     <div id="optik" class="category-content"><!-- Neons Unterkategorie -->
+      <div id="optik-neons" class="subcategory-content active">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Neons</h3>
+         <div class="price">
+          $30.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Underglow Beleuchtung</li>
+          <li>RGB Farbwechsel</li>
+          <li>Verschiedene Effekte</li>
+          <li>Street Glow Style</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Window Tint Unterkategorie -->
+      <div id="optik-windowtint" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Window Tint</h3>
+         <div class="price">
+          $15.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Scheibentönung</li>
+          <li>Verschiedene Tönungsgrade</li>
+          <li>UV Schutz</li>
+          <li>Privatsphäre</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Auspuff Unterkategorie -->
+      <div id="optik-auspuff" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Auspuff</h3>
+         <div class="price">
+          $25.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Sport Auspuffanlage</li>
+          <li>Verschiedene Sounds</li>
+          <li>Performance Steigerung</li>
+          <li>Custom Endrohr Design</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Räder Unterkategorie -->
+      <div id="optik-raeder" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Räder</h3>
+         <div class="price">
+          $25.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Custom Felgen</li>
+          <li>Verschiedene Designs</li>
+          <li>18-22 Zoll Größen</li>
+          <li>Performance Reifen</li>
+         </ul>
+        </div>
+       </div>
+      </div><!-- Räder Effects Unterkategorie -->
+      <div id="optik-raedereffects" class="subcategory-content">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Räder Effects</h3>
+         <div class="price">
+          $15.000
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Felgen Beleuchtung</li>
+          <li>Spinning Effekte</li>
+          <li>LED Ringe</li>
+          <li>Show Effekte</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div><!-- MISC Kategorie -->
+     <div id="misc" class="category-content"><!-- Services Unterkategorie -->
+      <div id="misc-services" class="subcategory-content active">
+       <div class="price-grid">
+        <div class="price-card">
+         <h3>Weitere Services</h3>
+         <div class="price">
+          Auf Anfrage meist $7.500
+         </div>
+         <ul style="text-align: left; color: #bdc3c7;">
+          <li>Spezielle Tuning Wünsche</li>
+          <li>Custom Modifikationen</li>
+          <li>Individuelle Anpassungen</li>
+          <li>Kontaktiere uns für Details</li>
+         </ul>
+        </div>
+       </div>
+      </div>
+     </div><!-- Preisrechner Kategorie -->
+     <div id="rechner" class="category-content">
+      <div class="section-header">
+       <h3>🧮 Tuning Preisrechner</h3>
+       <p>Berechne die Kosten für dein individuelles Tuning-Paket</p>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 400px; gap: 30px; margin-top: 30px;"><!-- Auswahl Bereich -->
+       <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 25px; border: 1px solid rgba(231, 76, 60, 0.3);">
+        <h3 style="color: #e74c3c; margin-bottom: 20px;">Wähle deine Tuning-Optionen:</h3><!-- Leistung Sektion -->
+        <div class="calculator-section">
+         <h4 style="color: #f39c12; margin-bottom: 15px;">⚡ Leistung</h4>
+         <div class="calculator-options"><label class="calculator-option"> <input type="checkbox" name="tuning" value="motor-pro" data-price="10000" onchange="updateCalculator()"> <span><p><font color="red">Motor Pro</font></p> - $10.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="motor-super" data-price="40000" onchange="updateCalculator()"> <span><p><font color="red">Motor Super</font></p> - $40.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="motor-elite" data-price="60000" onchange="updateCalculator()"> <span><p><font color="red">Motor Elite</font></p> - $60.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="motor-ultimate" data-price="70000" onchange="updateCalculator()"> <span><p><font color="red">Motor Ultimate</font></p> - $70.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="getriebe-pro" data-price="10000" onchange="updateCalculator()"> <span><p><font color="orange">Getriebe Pro</font></p> - $10.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="getriebe-super" data-price="40000" onchange="updateCalculator()"> <span><p><font color="orange">Getriebe Super</font></p> - $40.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="getriebe-elite" data-price="60000" onchange="updateCalculator()"> <span><p><font color="orange">Getriebe Elite</font></p> - $60.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="federung-standard" data-price="10000" onchange="updateCalculator()"> <span><p><font color="blue">Federung Standard</font></p> - $10.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="federung-super" data-price="40000" onchange="updateCalculator()"> <span><p><font color="blue">Federung Super</font></p> - $40.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="federung-elite" data-price="50000" onchange="updateCalculator()"> <span><p><font color="blue">Federung Elite</font></p> - $50.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="federung-ultimate" data-price="60000" onchange="updateCalculator()"> <span><p><font color="blue">Federung Ultimate</font></p> - $60.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="bremsen-standard" data-price="10000" onchange="updateCalculator()"> <span><p style="color: #3e62ff;">Bremsen Standard</p> - $10.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="bremsen-super" data-price="40000" onchange="updateCalculator()"> <span><p style="color: #3e62ff;">Bremsen Super</p> - $40.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="bremsen-elite" data-price="60000" onchange="updateCalculator()"> <span><p style="color: #3e62ff;">Bremsen Elite</p> - $60.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="turbo-system" data-price="25000" onchange="updateCalculator()"> <span><p><font color="green">Turbo System</font></p> - $25.000</span> </label>
+         </div>
+        </div><!-- Karosserie Sektion -->
+        <div class="calculator-section">
+         <h4 style="color: #f39c12; margin-bottom: 15px;">🚗 Karosserie &amp; Exterieur</h4>
+         <div class="calculator-options"><label class="calculator-option"> <input type="checkbox" name="tuning" value="body-kit" data-price="25000" onchange="updateCalculator()"> <span>Body Kit - $25.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="heckspoiler" data-price="25000" onchange="updateCalculator()"> <span>Heckspoiler - $25.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="dach-mods" data-price="25000" onchange="updateCalculator()"> <span>Dach Modifikationen - $25.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="motorraum-mods" data-price="25000" onchange="updateCalculator()"> <span>Motorraum Mods - $25.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="fluegel" data-price="25000" onchange="updateCalculator()"> <span>Flügel - $25.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="ueberrollbuegel" data-price="25000" onchange="updateCalculator()"> <span>Überrollbügel - $25.000</span> </label>
+         </div>
+        </div><!-- Optik & Sound Sektion -->
+        <div class="calculator-section">
+         <h4 style="color: #f39c12; margin-bottom: 15px;">💎 Optik &amp; Sound</h4>
+         <div class="calculator-options"><label class="calculator-option"> <input type="checkbox" name="tuning" value="neons" data-price="30000" onchange="updateCalculator()"> <span>Neons - $30.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="window-tint" data-price="15000" onchange="updateCalculator()"> <span>Window Tint - $15.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="auspuff" data-price="25000" onchange="updateCalculator()"> <span>Auspuff - $25.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="raeder" data-price="25000" onchange="updateCalculator()"> <span>Räder - $25.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="raeder-effects" data-price="15000" onchange="updateCalculator()"> <span>Räder Effects - $15.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="hupen" data-price="15000" onchange="updateCalculator()"> <span>Hupen Upgrade - $15.000</span> </label>
+         </div>
+        </div><!-- Lackierung Sektion -->
+        <div class="calculator-section">
+         <h4 style="color: #f39c12; margin-bottom: 15px;">🎨 Lackierung</h4>
+         <div class="calculator-options"><label class="calculator-option"> <input type="checkbox" name="tuning" value="primaer-lack" data-price="15000" onchange="updateCalculator()"> <span>Primär Lackierung - $15.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="sekundaer-lack" data-price="15000" onchange="updateCalculator()"> <span>Sekundär Lackierung - $15.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="perleffekt" data-price="10000" onchange="updateCalculator()"> <span>Perleffekt - $10.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="raeder-lack" data-price="5000" onchange="updateCalculator()"> <span>Räder Lackierung - $5.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="interieur-lack" data-price="10000" onchange="updateCalculator()"> <span>Interieur Lackierung - $10.000</span> </label> <label class="calculator-option"> <input type="checkbox" name="tuning" value="folie" data-price="10000" onchange="updateCalculator()"> <span>Folie - $10.000</span> </label>
+         </div>
+        </div>
+       </div><!-- Rechnung Bereich -->
+       <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 25px; border: 1px solid rgba(46, 204, 113, 0.3); position: sticky; top: 20px; height: fit-content;">
+        <h3 style="color: #2ecc71; margin-bottom: 20px;">💰 Deine Rechnung</h3>
+        <div id="calculator-items" style="margin-bottom: 20px; max-height: 400px; overflow-y: auto;">
+         <p style="color: #bdc3c7; font-style: italic;">Wähle Tuning-Optionen aus der Liste links...</p>
+        </div>
+        <div style="border-top: 2px solid rgba(46, 204, 113, 0.3); padding-top: 15px; margin-top: 15px;">
+         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;"><span style="font-size: 18px; font-weight: bold;">Zwischensumme:</span> <span id="calculator-subtotal" style="font-size: 18px; color: #2ecc71;">$0</span>
+         </div>
+         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;"><span style="font-size: 16px; color: #bdc3c7;">Vip Rabatt (10%):</span> <span id="calculator-discount" style="font-size: 16px; color: #e74c3c;">-$0</span>
+         </div>
+         <div style="border-top: 1px solid rgba(46, 204, 113, 0.3); padding-top: 10px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 24px; font-weight: bold; color: #2ecc71;">Gesamtpreis:</span> <span id="calculator-total" style="font-size: 24px; font-weight: bold; color: #2ecc71;">$0</span>
+          </div>
+         </div>
+        </div><button onclick="resetCalculator()" style="width: 100%; margin-top: 20px; background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s ease;"> 🗑️ Auswahl zurücksetzen </button> <button onclick="saveCalculation()" style="width: 100%; margin-top: 10px; background: linear-gradient(45deg, #3498db, #2980b9); color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s ease;"> 💾 Kalkulation speichern </button>
+       </div>
+      </div>
+     </div>
+    </div><!-- Events Tab -->
+    <div id="events" class="tab-content">
+     <div class="section-header">
+      <h2>Crew Events</h2>
+      <p>Spannende Events und Aktivitäten unserer Tuning-Crew</p>
+     </div>
+     <div class="events-grid"><!-- Aktuelles Event -->
+      <div class="event-card">
+       <div class="event-date">
+        15. Nov 2024
+       </div>
+       <h3>🏁 Street Racing Championship</h3>
+       <p><strong>Zeit:</strong> 20:00 - 23:00 Uhr</p>
+       <p><strong>Ort:</strong> Los Santos International Airport</p>
+       <p><strong>Teilnehmer:</strong> Alle Crew-Mitglieder</p>
+       <p>Das große Finale unserer internen Meisterschaft! Wer wird der schnellste Fahrer der Ty Tuner? Preise für die Top 3 Plätze!</p>
+       <div class="event-status status-upcoming">
+        🔥 Bald verfügbar
+       </div>
+      </div><!-- Vergangenes Event -->
+      <div class="event-card">
+       <div class="event-date">
+        28. Okt 2024
+       </div>
+       <h3>🔧 Tuning Workshop</h3>
+       <p><strong>Zeit:</strong> 18:00 - 21:00 Uhr</p>
+       <p><strong>Ort:</strong> Tyson Tuner GMBH & Co KG</p>
+       <p><strong>Teilnehmer:</strong> Azubis &amp; Mechaniker</p>
+       <p>Intensiver Workshop für unsere Azubis. Thema: Turbolader-Installation und Feintuning. Geleitet von unserem Chefmechaniker TuningMaster_Los.</p>
+       <div class="event-status status-finished">
+        ✅ Abgeschlossen
+       </div>
+      </div><!-- Laufendes Event -->
+      <div class="event-card">
+       <div class="event-date">
+        1-30. Nov
+       </div>
+       <h3>💰 Sales Challenge</h3>
+       <p><strong>Zeit:</strong> Ganzer Monat</p>
+       <p><strong>Ort:</strong> Autohaus</p>
+       <p><strong>Teilnehmer:</strong> Sales Team</p>
+       <p>Monatliche Verkaufs-Challenge! Welcher Salesman verkauft die meisten Fahrzeuge? Der Gewinner erhält einen Bonus von $50.000!</p>
+       <div class="event-status status-ongoing">
+        ⚡ Läuft gerade
+       </div>
+      </div><!-- Kommendes Event -->
+      <div class="event-card">
+       <div class="event-date">
+        22. Nov 2024
+       </div>
+       <h3>🎉 Crew Meet &amp; Greet</h3>
+       <p><strong>Zeit:</strong> 19:00 - 22:00 Uhr</p>
+       <p><strong>Ort:</strong> Vinewood Hills</p>
+       <p><strong>Teilnehmer:</strong> Alle + Gäste</p>
+       <p>Entspanntes Treffen mit BBQ und Car Show. Jeder kann seine neuesten Builds präsentieren. Perfekt für Networking und neue Kontakte!</p>
+       <div class="event-status status-upcoming">
+        📅 Geplant
+       </div>
+      </div><!-- Wöchentliches Event -->
+      <div class="event-card">
+       <div class="event-date">
+        Jeden Freitag
+       </div>
+       <h3>🏎️ Friday Night Cruise</h3>
+       <p><strong>Zeit:</strong> 21:00 - 23:00 Uhr</p>
+       <p><strong>Ort:</strong> Verschiedene Routen</p>
+       <p><strong>Teilnehmer:</strong> Alle Crew-Mitglieder</p>
+       <p>Wöchentliche Ausfahrt durch Los Santos. Verschiedene Routen, entspannte Atmosphäre und die Chance, neue Spots zu entdecken.</p>
+       <div class="event-status status-ongoing">
+        🔄 Wöchentlich
+       </div>
+      </div><!-- Spezielles Event -->
+      <div class="event-card">
+       <div class="event-date">
+        5. Dez 2024
+       </div>
+       <h3>🎄 Winter Drift Contest</h3>
+       <p><strong>Zeit:</strong> 20:00 - 24:00 Uhr</p>
+       <p><strong>Ort:</strong> Mount Chiliad</p>
+       <p><strong>Teilnehmer:</strong> Alle (Drift-Cars empfohlen)</p>
+       <p>Winterliches Drift-Event in den Bergen! Wer beherrscht die eisigen Kurven am besten? Spezielle Winter-Preise zu gewinnen!</p>
+       <div class="event-status status-upcoming">
+        ❄️ Winter Special
+       </div>
+      </div>
+     </div>
+    </div><!-- Bewerbung Tab -->
+    <div id="bewerbung" class="tab-content">
+     <div class="section-header">
+      <h2>Bewerbung</h2>
+      <p>Werde Teil der besten Tuning-Crew in Los Santos</p>
+     </div>
+     <div class="application-form">
+      <form id="applicationForm">
+       <div class="form-group"><label for="characterName">Charaktername (IC):</label> <input type="text" id="characterName" name="characterName" required>
+       </div>
+       <div class="form-group"><label for="discordName">Discord Name:</label> <input type="text" id="discordName" name="discordName" required>
+       </div>
+       <div class="form-group"><label for="age">Alter (IC):</label> <input type="number" id="age" name="age" min="18" max="80" required>
+       </div>
+       <div class="form-group"><label for="experience">RP Erfahrung (Jahre):</label> <select id="experience" name="experience" required> <option value="">Bitte wählen...</option> <option value="0-1">0-1 Jahre</option> <option value="1-3">1-3 Jahre</option> <option value="3-5">3-5 Jahre</option> <option value="5+">5+ Jahre</option> </select>
+       </div>
+       <div class="form-group"><label for="cars">Welche Autos besitzt du?</label> <textarea id="cars" name="cars" rows="3" placeholder="Liste deine Fahrzeuge auf..."></textarea>
+       </div>
+       <div class="form-group"><label for="skills">Deine Fähigkeiten:</label> <textarea id="skills" name="skills" rows="3" placeholder="Tuning, Fahren, Mechanik, etc..."></textarea>
+       </div>
+       <div class="form-group"><label for="motivation">Warum willst du zu uns?</label> <textarea id="motivation" name="motivation" rows="4" placeholder="Erzähl uns von deiner Motivation..." required></textarea>
+       </div>
+       <div class="form-group"><label for="availability">Verfügbarkeit:</label> <select id="availability" name="availability" required> <option value="">Bitte wählen...</option> <option value="täglich">Täglich online</option> <option value="wochentags">Hauptsächlich Wochentags</option> <option value="wochenende">Hauptsächlich Wochenende</option> <option value="unregelmäßig">Unregelmäßig</option> </select>
+       </div><button type="submit" class="submit-btn">Bewerbung absenden</button>
+      </form>
+     </div>
+    </div>
+   </div>
+  </main>
+  <script>
+        // Default configuration
+        const defaultConfig = {
+            crew_name: "Tyson Tuner GMBH & Co KG",
+            crew_slogan: "Speed. Style. Perfection.",
+            about_title: "Unser Team",
+            about_text: "Die besten Tuner der Stadt - Leidenschaft trifft auf Perfektion",
+            contact_info: "Discord: https://discord.gg/nqUHeyKap4"
+        };
+
+        // Tab switching functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all nav tabs
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked nav tab
+            event.target.classList.add('active');
+        }
+
+        // Subcategory definitions
+        const subcategories = {
+            'leistung': [
+                { id: 'motor', name: '🔧 Motor', target: 'leistung-motor' },
+                { id: 'getriebe', name: '⚙️ Getriebe', target: 'leistung-getriebe' },
+                { id: 'federung', name: '🏎️ Federung', target: 'leistung-federung' },
+                { id: 'bremsen', name: '🛑 Bremsen', target: 'leistung-bremsen' },
+                { id: 'turbo', name: '💨 Turbo', target: 'leistung-turbo' }
+            ],
+            'karosserie': [
+                { id: 'bodykit', name: '🚗 Body Kit', target: 'karosserie-bodykit' },
+                { id: 'heckspoiler', name: '🏁 Heckspoiler', target: 'karosserie-heckspoiler' },
+                { id: 'dach', name: '🏠 Dach', target: 'karosserie-dach' },
+                { id: 'motorraum', name: '🔧 Motorraum', target: 'karosserie-motorraum' }
+            ],
+            'hupen': [
+                { id: 'sounds', name: '📢 Hup-Sounds', target: 'hupen-sounds' }
+            ],
+            'exterieur': [
+                { id: 'fluegel', name: '🦅 Flügel', target: 'exterieur-fluegel' },
+                { id: 'ueberrollbuegel', name: '🛡️ Überrollbügel', target: 'exterieur-ueberrollbuegel' }
+            ],
+            'lackierung': [
+                { id: 'primaer', name: '🎨 Primär', target: 'lackierung-primaer' },
+                { id: 'sekundaer', name: '🖌️ Sekundär', target: 'lackierung-sekundaer' },
+                { id: 'perleffekt', name: '✨ Perleffekt', target: 'lackierung-perleffekt' },
+                { id: 'raeder', name: '🛞 Räder', target: 'lackierung-raeder' },
+                { id: 'interieur', name: '🪑 Interieur', target: 'lackierung-interieur' },
+                { id: 'folie', name: '📄 Folie', target: 'lackierung-folie' }
+            ],
+            'optik': [
+                { id: 'neons', name: '💡 Neons', target: 'optik-neons' },
+                { id: 'windowtint', name: '🪟 Window Tint', target: 'optik-windowtint' },
+                { id: 'auspuff', name: '💨 Auspuff', target: 'optik-auspuff' },
+                { id: 'raeder', name: '🛞 Räder', target: 'optik-raeder' },
+                { id: 'raedereffects', name: '✨ Räder Effects', target: 'optik-raedereffects' }
+            ],
+            'misc': [
+                { id: 'services', name: '🔧 Services', target: 'misc-services' }
+            ]
+        };
+
+        // Category switching functionality
+        function showCategory(categoryName) {
+            // Hide all category contents
+            const categoryContents = document.querySelectorAll('.category-content');
+            categoryContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all category buttons
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            categoryBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected category content
+            document.getElementById(categoryName).classList.add('active');
+
+            // Add active class to clicked category button
+            event.target.classList.add('active');
+
+            // Show subcategory navigation
+            showSubcategoryNav(categoryName);
+        }
+
+        // Subcategory navigation functionality
+        function showSubcategoryNav(categoryName) {
+            const subcategoryNav = document.getElementById('subcategory-nav');
+            const subs = subcategories[categoryName];
+
+            if (subs && subs.length > 1) {
+                // Create subcategory buttons
+                subcategoryNav.innerHTML = '';
+                subs.forEach((sub, index) => {
+                    const button = document.createElement('button');
+                    button.className = 'subcategory-btn' + (index === 0 ? ' active' : '');
+                    button.textContent = sub.name;
+                    button.onclick = () => showSubcategory(categoryName, sub.target, button);
+                    subcategoryNav.appendChild(button);
+                });
+                subcategoryNav.style.display = 'flex';
+            } else {
+                subcategoryNav.style.display = 'none';
+            }
+        }
+
+        // Subcategory switching functionality
+        function showSubcategory(categoryName, subcategoryTarget, clickedButton) {
+            // Hide all subcategory contents in this category
+            const categoryElement = document.getElementById(categoryName);
+            const subcategoryContents = categoryElement.querySelectorAll('.subcategory-content');
+            subcategoryContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all subcategory buttons
+            const subcategoryBtns = document.querySelectorAll('.subcategory-btn');
+            subcategoryBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected subcategory content
+            document.getElementById(subcategoryTarget).classList.add('active');
+
+            // Add active class to clicked subcategory button
+            clickedButton.classList.add('active');
+        }
+
+        // Discord Webhook URL - Ersetze WWWWW mit deinem echten Webhook Link
+        const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1434692026938425506/jA7RrTlf9hurbWjjjOk2O3UeVYbV0N9lqQbJFlquzfEw3rtR6BbBkYT6djsG3BderLJ7';
+
+        // Form submission handler
+        document.getElementById('applicationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            // Show loading state
+            submitBtn.textContent = 'Bewerbung wird gesendet...';
+            submitBtn.disabled = true;
+
+            try {
+                // Send to Discord if webhook URL is configured
+                if (DISCORD_WEBHOOK_URL !== 'https://discord.com/api/webhooks/1434692026938425506/jA7RrTlf9hurbWjjjOk2O3UeVYbV0N9lqQbJFlquzfEw3rtR6BbBkYT6djsG3BderLJ7') {
+                    const discordMessage = {
+                        embeds: [{
+                            title: "🚗 Neue Bewerbung - TY Tuner",
+                            color: 15158332, // Red color
+                            fields: [
+                                {
+                                    name: "👤 Charaktername (IC)",
+                                    value: data.characterName || "Nicht angegeben",
+                                    inline: true
+                                },
+                                {
+                                    name: "💬 Discord Name",
+                                    value: data.discordName || "Nicht angegeben",
+                                    inline: true
+                                },
+                                {
+                                    name: "🎂 Alter (IC)",
+                                    value: data.age ? `${data.age} Jahre` : "Nicht angegeben",
+                                    inline: true
+                                },
+                                {
+                                    name: "🎮 Tuning Erfahrung",
+                                    value: data.experience || "Nicht angegeben",
+                                    inline: true
+                                },
+                                {
+                                    name: "⏰ Verfügbarkeit",
+                                    value: data.availability || "Nicht angegeben",
+                                    inline: true
+                                },
+                                {
+                                    name: "🚙 Fahrzeuge",
+                                    value: data.cars || "Keine Angaben",
+                                    inline: false
+                                },
+                                {
+                                    name: "🔧 Fähigkeiten",
+                                    value: data.skills || "Keine Angaben",
+                                    inline: false
+                                },
+                                {
+                                    name: "💭 Motivation",
+                                    value: data.motivation || "Keine Angaben",
+                                    inline: false
+                                }
+                            ],
+                            timestamp: new Date().toISOString(),
+                            footer: {
+                                text: "TY Tuner  - Bewerbungssystem"
+                            }
+                        }]
+                    };
+
+                    await fetch(DISCORD_WEBHOOK_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(discordMessage)
+                    });
+                }
+
+                // Show success message
+                submitBtn.textContent = 'Bewerbung erfolgreich gesendet! ✓';
+                submitBtn.style.background = 'linear-gradient(45deg, #2ecc71, #27ae60)';
+                
+                // Reset form after success
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = 'linear-gradient(45deg, #9b59b6, #8e44ad)';
+                    submitBtn.disabled = false;
+                    this.reset();
+                }, 3000);
+
+            } catch (error) {
+                console.error('Fehler beim Senden der Bewerbung:', error);
+                
+                // Show error message
+                submitBtn.textContent = 'Fehler beim Senden - Versuche es erneut';
+                submitBtn.style.background = 'linear-gradient(45deg, #e74c3c, #c0392b)';
+                
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = 'linear-gradient(45deg, #9b59b6, #8e44ad)';
+                    submitBtn.disabled = false;
+                }, 3000);
+            }
+        });
+
+        // Element SDK configuration
+        async function onConfigChange(config) {
+            document.getElementById('crew-name').textContent = config.crew_name || defaultConfig.crew_name;
+            document.getElementById('crew-slogan').textContent = config.crew_slogan || defaultConfig.crew_slogan;
+            document.getElementById('about-title').textContent = config.about_title || defaultConfig.about_title;
+            document.getElementById('about-text').textContent = config.about_text || defaultConfig.about_text;
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["crew_name", config.crew_name || defaultConfig.crew_name],
+                ["crew_slogan", config.crew_slogan || defaultConfig.crew_slogan],
+                ["about_title", config.about_title || defaultConfig.about_title],
+                ["about_text", config.about_text || defaultConfig.about_text],
+                ["contact_info", config.contact_info || defaultConfig.contact_info]
+            ]);
+        }
+
+        // Car data for filtering
+        const carData = [
+            { name: "Halloween skyline", price: 2500000, status: "available", image: "ABBild1.png", category: "limited" },
+            { name: "Halloween skyline", price: 2500000, status: "available", image: "ABBild2.png", category: "limited" },
+            { name: "Halloween skyline", price: 2500000, status: "available", image: "ABBild3.png", category: "limited" },
+            { name: "Halloween skyline", price: 2500000, status: "available", image: "ABBild4.png", category: "limited" },
+            { name: "Halloween skyline", price: 2500000, status: "available", image: "ABBild5.png", category: "limited" },
+            { name: "Halloween Klingel Auto", price: 2500000, status: "available", image: "ABBild6.png", category: "limited" },
+            { name: "Halloween Geister-event Auto", price: 4500000, status: "available", image: "ABBild7.png", category: "limited" },
+            { name: "Felon 2", price: 450000, status: "available", image: "ABBild8.png", category: "luxury" },
+            { name: "Sultan 2", price: 1300000, status: "available", image: "ABBild9.png", category: "jdm" },
+            { name: "Schwarzer", price: 900000, status: "available", image: "ABBild10.png", category: "sport" },
+            { name: "Verlierer 2", price: 650000, status: "available", image: "ABBild11.png", category: "sport" },
+            { name: "Zorrusso", price: 1800000, status: "available", image: "ABBild12.png", category: "sport" },
+            { name: "Elegy", price: 1250000, status: "available", image: "ABBild13.png", category: "jdm" },
+            { name: "Halloween M3 E46", price: 60000000, status: "available", image: "ABBild14.png", category: "special" },
+            { name: "Halloween M5", price: 100000000, status: "available", image: "ABBild15.png", category: "special" },
+            { name: "BMW M4 F82", price: 1000000000, status: "available", image: "ABBild16.png", category: "special" },
+            { name: "BMW X6", price: 80000000, status: "available", image: "ABBild17.png", category: "special" },
+            { name: "Acura NSX Type S", price: 3100000, status: "available", image: "ABBild18.jpg", category: "jdm" },
+            { name: "Mercedes-AMG C63 S", price: 2200000, status: "available", image: "ABBild19.jpg", category: "luxury" },
+            { name: "Bugatti Veyron Super Sport", price: 12000000, status: "available", image: "ABBild20.jpg", category: "bike" },
+            
+            // Neue Fahrzeuge - 20 zusätzliche
+            { name: "Ford F-150 Raptor", price: 1350000, status: "available", image: "ABBild21.jpg", category: "offroad" },
+            { name: "Jeep Wrangler Rubicon", price: 980000, status: "reserved", image: "ABBild22.jpg", category: "offroad" },
+            { name: "Toyota Land Cruiser", price: 1150000, status: "available", image: "ABBild23.jpg", category: "offroad" },
+            { name: "Chevrolet Silverado ZR2", price: 1280000, status: "available", image: "ABBild24.jpg", category: "offroad" },
+            { name: "Ram 1500 TRX", price: 1450000, status: "reserved", image: "ABBild25.jpg", category: "offroad" },
+            { name: "Nissan 350Z", price: 780000, status: "available", image: "ABBild26.jpg", category: "jdm" },
+            { name: "Honda S2000", price: 890000, status: "available", image: "ABBild27.jpg", category: "jdm" },
+            { name: "Mazda MX-5 Miata", price: 650000, status: "reserved", image: "ABBild28.jpg", category: "jdm" },
+            { name: "Lexus LFA", price: 5200000, status: "available", image: "ABBild29.jpg", category: "jdm" },
+            { name: "Infiniti Q60 Red Sport", price: 1050000, status: "available", image: "ABBild30.jpg", category: "jdm" },
+            { name: "Aston Martin DB11", price: 3900000, status: "available", image: "ABBild31.jpg", category: "luxury" },
+            { name: "Bentley Continental GT", price: 3400000, status: "reserved", image: "ABBild32.jpg", category: "luxury" },
+            { name: "Rolls-Royce Wraith", price: 4800000, status: "available", image: "ABBild33.jpg", category: "luxury" },
+            { name: "Maserati MC20", price: 3600000, status: "available", image: "ABBild34.jpg", category: "limited" },
+            { name: "Pagani Huayra", price: 9500000, status: "reserved", image: "ABBild35.jpg", category: "bike" },
+            { name: "McLaren P1", price: 11200000, status: "available", image: "ABBild36.jpg", category: "bike" },
+            { name: "Ford GT", price: 6800000, status: "available", image: "ABBild37.jpg", category: "limited" },
+            { name: "Chevrolet Camaro ZL1", price: 1750000, status: "reserved", image: "ABBild38.jpg", category: "special" },
+            { name: "Dodge Viper ACR", price: 2850000, status: "available", image: "ABBild39.jpg", category: "special" },
+            { name: "BMW M4 Competition", price: 1950000, status: "available", image: "ABBild40.jpg", category: "sport" }
+        ];
+
+        // Category names mapping
+        const categoryNames = {
+            'jdm': 'JDM',
+            'limited': 'Limited',
+            'mspecial': 'Special',
+            'luxury': 'Luxus',
+            'sport': 'Sport',
+            'offroad': 'OFF-Road',
+            'bike': 'Motorräder'
+        };
+
+        // Current filter state
+        let currentPriceFilter = 'all';
+        let currentCategoryFilter = 'all';
+
+        // Main filter functionality
+        function filterCars(filterType) {
+            // Remove active class from all price filter buttons
+            const filterBtns = document.querySelectorAll('#autohaus .category-btn');
+            filterBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            currentPriceFilter = filterType;
+            applyFilters();
+        }
+
+        // Category filter functionality
+        function filterByCategory(categoryType) {
+            // Remove active class from all category filter buttons
+            const categoryBtns = document.querySelectorAll('#autohaus .subcategory-btn');
+            categoryBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            currentCategoryFilter = categoryType;
+            applyFilters();
+        }
+
+        // Apply both filters
+        function applyFilters() {
+            let filteredCars = [...carData];
+
+            // Apply category filter first
+            if (currentCategoryFilter !== 'all') {
+                filteredCars = filteredCars.filter(car => car.category === currentCategoryFilter);
+            }
+
+            // Apply availability filter
+            if (currentPriceFilter === 'available') {
+                filteredCars = filteredCars.filter(car => car.status === 'available');
+            }
+
+            // Apply price sorting
+            switch(currentPriceFilter) {
+                case 'cheapest':
+                    filteredCars.sort((a, b) => a.price - b.price);
+                    break;
+                case 'expensive':
+                    filteredCars.sort((a, b) => b.price - a.price);
+                    break;
+                case 'all':
+                case 'available':
+                default:
+                    // Keep original order or already filtered
+                    break;
+            }
+
+            // Render filtered cars
+            renderCars(filteredCars);
+        }
+
+        // Render cars function
+        function renderCars(cars) {
+            const showcase = document.getElementById('car-showcase');
+            showcase.innerHTML = '';
+
+            cars.forEach(car => {
+                const statusIcon = car.status === 'available' ? '✅ Verfügbar' : '⏳ Reserviert';
+                const priceFormatted = new Intl.NumberFormat('de-DE', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0
+                }).format(car.price).replace('$', '$');
+
+                const categoryName = categoryNames[car.category] || car.category;
+
+                const carElement = document.createElement('div');
+                carElement.className = 'car-item';
+                carElement.innerHTML = `
+                    <div class="car-image">
+                        <img src="${car.image}" alt="${car.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div style="display: none; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: #e74c3c;">
+                            ${car.image.replace('.jpg', '')}
+                        </div>
+                    </div>
+                    <h3>${car.name}</h3>
+                    <p><strong>Preis:</strong> ${priceFormatted}</p>
+                    <p><strong>Status:</strong> ${statusIcon}</p>
+                    <p><strong>Kategorie:</strong> ${categoryName}</p>
+                `;
+                showcase.appendChild(carElement);
+            });
+        }
+
+        // Initialize subcategories on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show subcategories for the default active category (leistung)
+            showSubcategoryNav('leistung');
+            
+            // Initialize car showcase with all cars
+            renderCars(carData);
+        });
+
+        // Calculator functionality
+        let selectedItems = [];
+
+        function updateCalculator() {
+            const checkboxes = document.querySelectorAll('input[name="tuning"]:checked');
+            selectedItems = [];
+            
+            checkboxes.forEach(checkbox => {
+                const price = parseInt(checkbox.dataset.price);
+                const name = checkbox.nextElementSibling.textContent.split(' - ')[0];
+                selectedItems.push({ name, price });
+            });
+
+            renderCalculatorItems();
+            updateCalculatorTotals();
+        }
+
+        function renderCalculatorItems() {
+            const itemsContainer = document.getElementById('calculator-items');
+            
+            if (selectedItems.length === 0) {
+                itemsContainer.innerHTML = '<p style="color: #bdc3c7; font-style: italic;">Wähle Tuning-Optionen aus der Liste links...</p>';
+                return;
+            }
+
+            itemsContainer.innerHTML = selectedItems.map(item => `
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <span style="color: #ecf0f1; font-size: 14px;">${item.name}</span>
+                    <span style="color: #2ecc71; font-weight: bold;">$${item.price.toLocaleString()}</span>
+                </div>
+            `).join('');
+        }
+
+        function updateCalculatorTotals() {
+            const subtotal = selectedItems.reduce((sum, item) => sum + item.price, 0);
+            const discount = Math.floor(subtotal * 0.1); // 10% Vip-Rabatt
+            const total = subtotal - discount;
+
+            document.getElementById('calculator-subtotal').textContent = `$${subtotal.toLocaleString()}`;
+            document.getElementById('calculator-discount').textContent = `-$${discount.toLocaleString()}`;
+            document.getElementById('calculator-total').textContent = `$${total.toLocaleString()}`;
+        }
+
+        function resetCalculator() {
+            // Uncheck all checkboxes
+            const checkboxes = document.querySelectorAll('input[name="tuning"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+
+            // Reset calculator
+            selectedItems = [];
+            renderCalculatorItems();
+            updateCalculatorTotals();
+        }
+
+        function saveCalculation() {
+            if (selectedItems.length === 0) {
+                // Show message if no items selected
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '⚠️ Keine Optionen ausgewählt';
+                button.style.background = 'linear-gradient(45deg, #e74c3c, #c0392b)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'linear-gradient(45deg, #3498db, #2980b9)';
+                }, 2000);
+                return;
+            }
+
+            // Create calculation summary
+            const subtotal = selectedItems.reduce((sum, item) => sum + item.price, 0);
+            const discount = Math.floor(subtotal * 0.1);
+            const total = subtotal - discount;
+
+            const calculationText = `
+🧮 TUNING KALKULATION - Ty Tuner
+
+📋 Ausgewählte Optionen:
+${selectedItems.map(item => `• ${item.name}: $${item.price.toLocaleString()}`).join('\n')}
+
+💰 Preisübersicht:
+Zwischensumme: $${subtotal.toLocaleString()}
+Vip-Rabatt (10%): -$${discount.toLocaleString()}
+Gesamtpreis: $${total.toLocaleString()}
+
+📅 Erstellt am: ${new Date().toLocaleDateString('de-DE')}
+            `.trim();
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(calculationText).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '✓ In Zwischenablage kopiert!';
+                button.style.background = 'linear-gradient(45deg, #2ecc71, #27ae60)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'linear-gradient(45deg, #3498db, #2980b9)';
+                }, 2000);
+            }).catch(() => {
+                // Fallback: Show calculation in alert
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '💾 Kalkulation gespeichert';
+                button.style.background = 'linear-gradient(45deg, #2ecc71, #27ae60)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'linear-gradient(45deg, #3498db, #2980b9)';
+                }, 2000);
+            });
+        }
+
+        // Initialize Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities,
+                mapToEditPanelValues
+            });
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'998787f721317a98',t:'MTc2MjEyNzM5NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
